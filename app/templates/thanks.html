@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}Thank you — {{ settings.site_name }}{% endblock %}
+{% block content %}<section class="thanks section-wrap"><p class="eyebrow"><span class="pulse"></span> MESSAGE RECEIVED</p><h1>{% if subscribed %}You're on the list.{% else %}Thanks for reaching out<span class="lime">.</span>{% endif %}</h1><p>{% if subscribed %}Your email has been saved. Newsletter delivery is not configured in this starter yet.{% else %}Your enquiry has been saved. I'll review it from the admin dashboard.{% endif %}</p><a class="btn btn-primary" href="/">Return to portfolio ↗</a></section>{% endblock %}

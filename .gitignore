@@ -1,0 +1,13 @@
+.venv/
+app/documents/
+__pycache__/
+*.py[cod]
+.env
+portfolio.db
+test_portfolio.db
+test_portfolio.db-*
+.pytest_cache/
+.coverage
+.DS_Store
+.idea/
+.vscode/

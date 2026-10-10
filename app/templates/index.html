@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block title %}Alok Agarwal — Search × Data × AI{% endblock %}
+{% block content %}
+<section class="hero section-wrap" id="home">
+  <div class="hero-ambience" aria-hidden="true"></div>
+  <div class="hero-copy">
+    <div class="availability reveal"><span class="pulse"></span> BUILDING AT THE INTERSECTION OF SEARCH, DATA & AI</div>
+    <h1 class="hero-title reveal">I turn complex<br>questions into<br><span class="type-wrap"><span id="typed-word">insight</span><i class="caret">|</i></span><span class="title-period">.</span></h1>
+    <p class="hero-lede reveal">I'm <strong>Alok Agarwal</strong> — an SEO strategist and digital marketer expanding into data science and AI/ML. I connect business context with analytical thinking to build things that move decisions forward.</p>
+    <div class="hero-cta reveal"><a class="btn btn-primary magnetic" href="#work">Explore selected work <span>↘</span></a><a class="btn btn-outline" href="{{ settings.linkedin_url }}" target="_blank" rel="noopener">Connect on LinkedIn <span>↗</span></a></div>
+    <div class="hero-foot reveal"><span><b>01</b> SEARCH STRATEGY</span><span><b>02</b> DATA & ANALYTICS</span><span><b>03</b> AI / ML PROJECTS</span></div>
+  </div>
+  <div class="hero-visual reveal" aria-label="Animated abstract data visualization">
+    <div class="visual-orbit orbit-a"></div><div class="visual-orbit orbit-b"></div><div class="visual-orbit orbit-c"></div>
+    <div class="profile-card"><div class="profile-card-top"><span><i class="core-led"></i> THE PERSON BEHIND THE PROJECTS</span><span class="core-code">AA / 01</span></div><div class="profile-photo-wrap"><img class="profile-photo" src="{{ url_for('static', path='/images/alok-agarwal.jpg') }}" alt="Professional portrait of Alok Agarwal" width="768" height="768" fetchpriority="high"><div class="profile-photo-shade"></div><div class="profile-photo-caption"><strong>Alok Agarwal</strong><span>SEO · DATA · AI/ML</span></div></div><div class="profile-card-bottom"><span>CURIOUS BY DEFAULT</span><span class="core-status">● BUILDING IN PUBLIC</span></div></div>
+    <div class="float-chip chip-one"><span>↗</span> ANALYTICAL MINDSET</div><div class="float-chip chip-two"><span>✳</span> BUSINESS CONTEXT</div><div class="float-chip chip-three">PYTHON / SQL / ML</div><div class="visual-cross cross-one">+</div><div class="visual-cross cross-two">+</div>
+  </div>
+  <div class="hero-scroll"><span></span> SCROLL TO DISCOVER</div>
+</section>
+<div class="marquee" aria-label="Areas of focus"><div class="marquee-track"><span>SEARCH INTELLIGENCE <b>✳</b> DATA SCIENCE <b>✳</b> MACHINE LEARNING <b>✳</b> MARKETING ANALYTICS <b>✳</b> PYTHON ENGINEERING <b>✳</b> SEARCH INTELLIGENCE <b>✳</b> DATA SCIENCE <b>✳</b> MACHINE LEARNING <b>✳</b> MARKETING ANALYTICS <b>✳</b> PYTHON ENGINEERING <b>✳</b></span></div></div>
+<section class="section-wrap section work-section" id="work">
+  <div class="section-head reveal"><div><p class="eyebrow">01 / SELECTED WORK</p><h2>Proof of work<span class="lime">.</span></h2></div><p class="head-note">A selection of projects across SEO intelligence, machine learning, data analysis, and developer tooling. Explore the source code or live demos.</p></div>
+  <div class="project-tools reveal" aria-label="Filter projects">
+    <div class="project-filters" role="group" aria-label="Filter projects by category">
+      <button type="button" class="filter-chip is-active" data-filter="all" aria-pressed="true">All work <span>08</span></button>
+      <button type="button" class="filter-chip" data-filter="seo" aria-pressed="false">SEO & AI</button>
+      <button type="button" class="filter-chip" data-filter="analytics" aria-pressed="false">Analytics</button>
+      <button type="button" class="filter-chip" data-filter="ml" aria-pressed="false">Machine learning</button>
+      <button type="button" class="filter-chip" data-filter="engineering" aria-pressed="false">Engineering</button>
+    </div>
+    <p class="filter-hint" id="project-filter-status" aria-live="polite">Showing featured projects first. Filter to find relevant work.</p>
+  </div>
+  <div class="project-grid" id="project-grid">
+    {% for project in projects %}
+    <article class="project-card reveal {% if not project.featured %}extra-project{% endif %}" data-categories="{% if 'SEO' in project.type or 'SEO' in project.name %}seo {% endif %}{% if 'BUSINESS INTELLIGENCE' in project.type or 'ANALYTICS' in project.type or 'SQL' in project.type or 'EDA' in project.type %}analytics {% endif %}{% if 'ML' in project.type or 'MODEL' in project.type or 'CLASSIFICATION' in project.type or 'RECOMMENDATION' in project.type or 'REGRESSION' in project.type %}ml {% endif %}{% if 'PYTHON' in project.type or 'DEVELOPER' in project.type %}engineering {% endif %}">
+      <div class="project-meta"><span>{{ project.number }} / {{ project.type }}</span><span class="card-index">↗</span></div>
+      <div class="project-visual {{ project.visual }}">
+        {% if project.visual == "seo" %}<div class="seo-mock"><div class="mock-sidebar"><i></i><i></i><i></i><i></i></div><div class="mock-content"><div class="mock-title"></div><div class="mock-kpis"><i></i><i></i><i></i></div><div class="mock-graph"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div></div></div>
+        {% elif project.visual == "churn" %}<div class="radial-ui"><div class="radial-ring"><span>ML<small>MODEL EVAL</small></span></div><div class="radial-tags"><i>MODEL</i><i>VALIDATE</i><i>EXPLAIN</i></div></div>
+        {% elif project.visual == "fare" %}<div class="fare-ui"><span>FARE ESTIMATION / ML</span><strong><em>FEATURE</em></strong><div class="fare-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><small>FEATURES → PIPELINE → PREDICTION</small></div>
+        {% elif project.visual == "sql" %}<div class="sql-ui"><span>SELECT</span> hospital, avg(wait_time)<br><span>FROM</span> patient_flow<br><span>GROUP BY</span> hospital;<div class="sql-result">QUERY COMPLETE <b>✓</b></div></div>
+        {% elif project.visual == "eda" %}<div class="eda-ui"><div class="eda-scatter">{% for i in range(36) %}<i style="--i:{{ i }}"></i>{% endfor %}</div><div class="eda-legend"><span>CARAT</span><span>PRICE</span><span>QUALITY</span></div></div>
+        {% else %}<div class="code-ui"><span>class</span> RepositoryDoctor:<br>&nbsp;&nbsp;<span>def</span> inspect(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;return findings<br><div class="code-success">✓ ANALYSIS COMPLETE</div></div>{% endif %}
+      </div>
+      <div class="project-body"><p class="project-kind">{{ project.type }}</p><h3>{{ project.name }}</h3><p class="project-summary">{{ project.summary }}</p><div class="tags">{% for tag in project.stack %}<span>{{ tag }}</span>{% endfor %}</div><div class="project-links"><a href="{{ project.repo }}" target="_blank" rel="noopener">Source code <span>↗</span></a>{% if project.demo %}<a href="{{ project.demo }}" target="_blank" rel="noopener">Live demo <span>↗</span></a>{% elif project.demo_note %}<span class="demo-note">{{ project.demo_note }}</span>{% endif %}</div></div>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="section-end reveal"><span>MORE EXPERIMENTS, NOTEBOOKS & REPOSITORIES</span><div class="section-actions"><button class="text-action" id="show-all-projects" type="button" aria-expanded="false">Show all projects <span>＋</span></button><a href="{{ settings.github_url }}" target="_blank" rel="noopener">Explore GitHub <span>↗</span></a></div></div>
+</section>
+
+<section class="section-wrap section case-studies-section" id="case-studies">
+  <div class="section-head reveal"><div><p class="eyebrow">02 / ENGINEERING NOTES</p><h2>How I approach<br><span class="lime">real problems.</span></h2></div><p class="head-note">A concise guide to the work behind selected repositories. Visit the source for full methodology, code, and documented results.</p></div>
+  <div class="expertise-grid">
+    <article class="expertise-card reveal"><span class="expertise-num">CASE 01</span><h3>SEO AI Intelligence</h3><p>Connect crawling and on-page signals with search intent, content gaps, model evaluation, and prioritized recommendations. Benchmarks and synthetic-data results should be distinguished from observational Search Console data.</p><div class="skill-line"><span>FastAPI</span><span>SEO</span><span>ML</span><span>NLP</span></div><a href="https://github.com/mightyalok00/seo-ai-intelligence" target="_blank" rel="noopener">Read architecture & methodology ↗</a></article>
+    <article class="expertise-card reveal"><span class="expertise-num">CASE 02</span><h3>Repo Doctor AI</h3><p>Analyze repository structure, testing, security, ML leakage risks, reproducibility and CI/CD. Patch proposals should be validated in a disposable environment before being described as verified.</p><div class="skill-line"><span>Python</span><span>AST</span><span>Pytest</span><span>Security</span></div><a href="https://github.com/mightyalok00/Repo-Doctor-AI" target="_blank" rel="noopener">Explore engineering approach ↗</a></article>
+    <article class="expertise-card reveal"><span class="expertise-num">CASE 03</span><h3>Predictive modelling</h3><p>Compare baselines and candidate models with reproducible preprocessing, train/test separation, cross-validation and metrics that explain trade-offs—not accuracy alone.</p><div class="skill-line"><span>scikit-learn</span><span>Validation</span><span>Metrics</span><span>Streamlit</span></div><a href="https://github.com/mightyalok00/bank-customer-churn-prediction" target="_blank" rel="noopener">Explore churn prediction ↗</a></article>
+  </div>
+  <p class="metrics-note">Case-study summaries describe repository scope. Model scores and business outcomes should be checked in each project's documented results before being reused in hiring or client materials.</p>
+</section>
+
+<section class="metrics-band"><div class="section-wrap metrics-grid"><div class="metric reveal"><strong>08</strong><span>CURATED PROJECTS</span></div><div class="metric reveal"><strong>04<span class="lime">+</span></strong><span>PROJECT CATEGORIES</span></div><div class="metric reveal"><strong>Python<span class="lime">.</span></strong><span>CORE BUILDING TOOL</span></div><div class="metric reveal"><strong>SEO <span class="lime">×</span> AI</strong><span>THE DIFFERENTIATOR</span></div></div><p class="metrics-note">Selected public projects. Outcomes are not presented as client results.</p></section>
+<section class="section-wrap section expertise-section" id="expertise">
+  <div class="section-head reveal"><div><p class="eyebrow">02 / WHAT I BRING</p><h2>Two worlds.<br>One <span class="lime">point of view.</span></h2></div><p class="head-note">Marketing gives me the business question. Data and engineering give me more ways to investigate it, test it, and communicate what matters.</p></div>
+  <div class="expertise-grid">
+    <article class="expertise-card reveal"><span class="expertise-num">01</span><div class="expertise-icon">⌕</div><h3>SEO & Growth</h3><p>Technical SEO, local search, search intent, content optimization, Google Search Console, GA4, and performance reporting.</p><div class="skill-line"><span>Search strategy</span><span>On-page / Technical</span><span>Local SEO</span><span>GSC / GA4</span></div></article>
+    <article class="expertise-card reveal"><span class="expertise-num">02</span><div class="expertise-icon">∑</div><h3>Data & Analytics</h3><p>Turn raw data into usable evidence through validation, exploratory analysis, statistical thinking, SQL, and visualization.</p><div class="skill-line"><span>Python</span><span>Pandas / NumPy</span><span>SQL / MySQL</span><span>EDA / Dashboards</span></div></article>
+    <article class="expertise-card reveal"><span class="expertise-num">03</span><div class="expertise-icon">⌘</div><h3>Machine Learning</h3><p>Build reproducible supervised-learning workflows with leakage-aware preprocessing, cross-validation, model comparison, and evaluation.</p><div class="skill-line"><span>Scikit-learn</span><span>Regression</span><span>Classification</span><span>Model evaluation</span></div></article>
+    <article class="expertise-card reveal"><span class="expertise-num">04</span><div class="expertise-icon">✳</div><h3>Python & AI Tools</h3><p>Develop modular projects, interactive prototypes, data workflows, and experiments that prioritize clarity and practical utility.</p><div class="skill-line"><span>Streamlit</span><span>Git / GitHub</span><span>Testing</span><span>AI/ML learning</span></div></article>
+  </div>
+</section>
+<section class="section-wrap section target-section" id="target-roles">
+  <div class="section-head reveal"><div><p class="eyebrow">04 / ROLE FOCUS</p><h2>Where I can<br><span class="lime">make an impact.</span></h2></div><p class="head-note">Targeting opportunities that combine search and marketing knowledge with evidence-led analysis. Project examples are linked above; no unverified employment, education, or credential claims are included.</p></div>
+  <div class="target-role-grid">
+    <article class="target-role-card reveal"><span>01 / SEARCH</span><h3>SEO & Search Strategy</h3><p>Technical SEO, local search, content optimization, and search-performance reporting.</p></article>
+    <article class="target-role-card reveal"><span>02 / MARKETING DATA</span><h3>Marketing / SEO Analyst</h3><p>Campaign measurement, website analytics, reporting, dashboards, and actionable recommendations.</p></article>
+    <article class="target-role-card reveal"><span>03 / ANALYTICS</span><h3>Junior Data Analyst</h3><p>Python, SQL, exploratory analysis, and clearly communicated findings; also open to entry-level data science opportunities.</p></article>
+  </div>
+</section>
+<section class="section-wrap section services-section"><div class="section-head reveal"><div><p class="eyebrow">04 / COLLABORATION</p><h2>Useful work.<br><span class="lime">Clear outcomes.</span></h2></div><p class="head-note">Available for relevant roles, freelance briefs, and collaborations where marketing context and analytical problem-solving can work together.</p></div><div class="services-list">{% for number, title, description in services %}<a href="#contact" class="service-row reveal"><span>{{ number }}</span><div><h3>{{ title }}</h3><p>{{ description }}</p></div><b>↗</b></a>{% endfor %}</div></section>
+<section class="offer-section"><div class="section-wrap offer-inner">
+  <div class="offer-copy reveal"><p class="eyebrow">05 / WORK TOGETHER</p><h2>From business question<br>to <span class="lime">useful output.</span></h2><p>Need a clearer SEO report, a practical analytics dashboard, or a Python prototype? Let's define the goal first and build toward a measurable result.</p></div>
+  <div class="offer-cards">
+    <a class="offer-card reveal" href="#contact"><span class="offer-number">01 / AUDIT</span><strong>SEO & analytics review</strong><small>Search visibility · reporting · prioritized actions</small><span class="offer-arrow">↗</span></a>
+    <a class="offer-card reveal" href="#contact"><span class="offer-number">02 / BUILD</span><strong>Dashboard & Python prototype</strong><small>Data cleanup · visualization · workflow automation</small><span class="offer-arrow">↗</span></a>
+    <a class="offer-card reveal" href="#contact"><span class="offer-number">03 / COLLABORATE</span><strong>Roles & project partnerships</strong><small>SEO · analytics · data science · applied AI</small><span class="offer-arrow">↗</span></a>
+  </div>
+</div></section>
+
+<section class="section-wrap section recruiter-section" id="quick-answers">
+  <div class="section-head reveal"><div><p class="eyebrow">06 / FOR RECRUITERS & CLIENTS</p><h2>Quick answers.<br><span class="lime">Clear next steps.</span></h2></div><p class="head-note">Explore concise answers based on the information published on this portfolio.</p></div>
+  <div class="quick-answer-layout reveal">
+    <div class="quick-question-list" role="group" aria-label="Common questions">
+      <button type="button" class="quick-question is-active" data-answer="focus" aria-pressed="true">What roles are you targeting? <span>↗</span></button>
+      <button type="button" class="quick-question" data-answer="projects" aria-pressed="false">Which projects should I review? <span>↗</span></button>
+      <button type="button" class="quick-question" data-answer="services" aria-pressed="false">What can you help a business with? <span>↗</span></button>
+      <button type="button" class="quick-question" data-answer="approach" aria-pressed="false">How do you approach a project? <span>↗</span></button>
+    </div>
+    <article class="quick-answer-panel" aria-live="polite"><span class="answer-kicker">PORTFOLIO GUIDE / 01</span><h3 id="quick-answer-title">Roles I'm targeting</h3><p id="quick-answer-text">I'm targeting SEO and search strategy roles, marketing/SEO analyst roles, and junior data analyst or entry-level data science opportunities where I can combine business context with analytical problem-solving.</p><a class="text-action" href="#contact">Start a conversation <span>↗</span></a></article>
+  </div>
+</section>
+
+<section class="section-wrap section faq-section" id="faq">
+  <div class="section-head reveal"><div><p class="eyebrow">07 / FAQ</p><h2>Good questions.<br><span class="lime">Straight answers.</span></h2></div><p class="head-note">A little more detail on my project work, skills, and ways to connect.</p></div>
+  <div class="faq-list reveal">
+    <details class="faq-item">
+      <summary><span class="faq-number">01</span><span class="faq-question">What roles are you looking for?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-answer"><div><p>I’m targeting SEO and search strategy, marketing/SEO analyst, and junior data analyst roles. I’m also open to entry-level data science opportunities that value business context and analytical problem-solving.</p></div></div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-number">02</span><span class="faq-question">What can I expect from your projects?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-answer"><div><p>They’re public portfolio projects that show how I approach search intelligence, analytics, SQL, Python, and machine learning. Each project links to its source repository; project outcomes shouldn’t be read as client results unless explicitly documented as such.</p></div></div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-number">03</span><span class="faq-question">Which tools and skills do you use?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-answer"><div><p>My portfolio combines SEO and search analytics with Python, SQL/MySQL, Pandas, NumPy, scikit-learn, exploratory analysis, dashboards, and Streamlit prototypes.</p></div></div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-number">04</span><span class="faq-question">Are the campaign metrics independently verified?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-answer"><div><p>No campaign metrics are currently published on this site. I share results only with their context and appropriate supporting evidence, and don’t present learning-project scores as business outcomes.</p></div></div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-number">05</span><span class="faq-question">Can you discuss a role or project?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-answer"><div><p>Yes. Send a role, project brief, or business question through the contact form. We can clarify goals, available data, scope, and success criteria before deciding on next steps.</p></div></div>
+    </details>
+    <details class="faq-item">
+      <summary><span class="faq-number">06</span><span class="faq-question">Where can I find your work and contact details?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-answer"><div><p>Browse the project cards for repository links, visit my GitHub or LinkedIn profiles, or use the contact form at the bottom of this page.</p></div></div>
+    </details>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="section-wrap contact-shell">
+    <div class="contact-heading reveal">
+      <div><p class="eyebrow">08 / START A CONVERSATION</p><h2>Have a challenge?<br><span class="lime">Let's talk.</span></h2></div>
+      <p>Share a role, a project brief, or a problem you're trying to solve. Pick whichever way to reach out works for you.</p>
+    </div>
+    <div class="contact-layout">
+      <aside class="contact-info reveal" aria-label="Other ways to connect">
+        <p class="contact-info-label">DIRECT CONTACT</p>
+        <a class="contact-method" href="mailto:{{ settings.contact_email }}">
+          <span class="contact-method-icon" aria-hidden="true">@</span>
+          <span class="contact-method-copy"><small>EMAIL</small><strong>{{ settings.contact_email }}</strong><em>Best for roles and project briefs</em></span>
+          <span class="contact-method-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="contact-method" href="tel:+91{{ settings.contact_phone|replace(' ', '') }}">
+          <span class="contact-method-icon" aria-hidden="true">↗</span>
+          <span class="contact-method-copy"><small>PHONE</small><strong>+91 {{ settings.contact_phone }}</strong><em>Call to start a conversation</em></span>
+          <span class="contact-method-arrow" aria-hidden="true">↗</span>
+        </a>
+        <div class="contact-social-block">
+          <span>FIND ME ELSEWHERE</span>
+          <div class="contact-social"><a href="{{ settings.linkedin_url }}" target="_blank" rel="noopener">LinkedIn <span>↗</span></a><a href="{{ settings.github_url }}" target="_blank" rel="noopener">GitHub <span>↗</span></a></div>
+        </div>
+        <p class="contact-response-note"><span class="pulse" aria-hidden="true"></span> Send a note with enough context for me to follow up.</p>
+      </aside>
+      <form class="contact-form reveal" action="/contact" method="post" aria-label="Send a message">
+        <div class="contact-form-heading"><span>YOUR MESSAGE</span><span>ALL FIELDS MARKED * ARE REQUIRED</span></div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="honeypot" aria-hidden="true"><label>Leave this field empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="contact-fields-row">
+          <label for="contact-name"><span class="contact-field-label">Your name <i>*</i></span><input id="contact-name" name="name" maxlength="100" autocomplete="name" placeholder="e.g. Alex Morgan" required></label>
+          <label for="contact-email"><span class="contact-field-label">Email address <i>*</i></span><input id="contact-email" name="email" type="email" maxlength="254" autocomplete="email" placeholder="you@company.com" required></label>
+        </div>
+        <label for="contact-topic"><span class="contact-field-label">I'm reaching out about</span><select id="contact-topic" name="topic"><option>General</option><option>Job opportunity</option><option>SEO / marketing analytics</option><option>Data science / ML project</option><option>Freelance collaboration</option></select></label>
+        <label for="contact-message"><span class="contact-field-label">Message <i>*</i></span><textarea id="contact-message" name="message" rows="5" maxlength="4000" placeholder="A little context helps me give you a useful reply..." required></textarea></label>
+        <div class="contact-submit-row"><button class="btn btn-primary" type="submit">Send message <span>↗</span></button><small>Your message is stored securely in the site database. Please don't include sensitive personal information.</small></div>
+      </form>
+    </div>
+  </div>
+</section>
+<section class="closing-band"><div class="section-wrap closing-inner"><span>KEEP LEARNING. KEEP BUILDING.</span><a href="#home">Back to top ↑</a></div></section>
+{% endblock %}
